@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
+#pragma warning disable 649
+
     [SerializeField] float sensitivityX = 15f;
     [SerializeField] float sensitivityY = 0.5f;
 

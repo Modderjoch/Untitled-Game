@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+#pragma warning disable 649
+
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerLook playerLook;
 
