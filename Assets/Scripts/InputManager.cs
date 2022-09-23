@@ -15,23 +15,30 @@ public class InputManager : MonoBehaviour
     Vector2 horizontalInput;
     Vector2 mouseInput;
 
+    bool controllerConnected = false;
+
     private void Awake()
     {
         controls = new PlayerControls();
         movement = controls.Movement;
 
         //Get Movement Input (WASD)
-        movement.HorizontalMovement.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
+        movement.Walking.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
 
-        //Get Spacebar Input
+        //Get Jump Input
         movement.Jump.performed += _ => playerMovement.OnJump();
+
+        //Get Crouch Input
+
+        movement.Crouch.performed += _ => playerMovement.OnCrouch(true);
+        movement.Crouch.canceled += _ => playerMovement.OnCrouch(false);
 
         //Get Mouse Input
         movement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         movement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;        
     }
 
     private void Update()

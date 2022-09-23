@@ -6,21 +6,34 @@ public class PlayerMovement : MonoBehaviour
 {
 #pragma warning disable 649
 
+    //Speed and movement based on the horizontal input
     [SerializeField] CharacterController controller;
     [SerializeField] float speed = 11f;
     Vector2 horizontalInput;
 
+    //Crouching
+    [SerializeField] Transform playerCamera;
+    bool crouch;
+
+    //Jumping
     [SerializeField] float jumpHeight = 3.5f;
     bool jump;
-
-    [SerializeField] float gravity = -30f; // -9.81
-    Vector3 verticalVelocity = Vector3.zero;
     [SerializeField] LayerMask groundMask;
     bool isGrounded;
+
+    //Simulating gravity
+    [SerializeField] float gravity = -30f; // -9.81
+    Vector3 verticalVelocity = Vector3.zero;
+    
 
     private void Update()
     {
         GroundedCheck();
+    }
+
+    private void Crouch()
+    {
+        
     }
 
     private void GroundedCheck()
@@ -61,5 +74,19 @@ public class PlayerMovement : MonoBehaviour
     public void OnJump()
     {
         jump = true;
+    }
+
+    public void OnCrouch(bool crouchPressed)
+    {
+        if (crouchPressed)
+        {
+            crouch = true;
+        }
+        else if (crouchPressed == false)
+        {
+            crouch = false;
+        }
+
+        Debug.Log("Crouch");
     }
 }
