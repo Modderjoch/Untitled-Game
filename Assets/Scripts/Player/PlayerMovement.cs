@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,12 +9,19 @@ public class PlayerMovement : MonoBehaviour
 
     //Speed and movement based on the horizontal input
     [SerializeField] CharacterController controller;
-    [SerializeField] float speed = 11f;
+    [SerializeField] float speed = 10f;
+    float walkSpeed;
+    float sprintSpeed;
+    float crouchSpeed;
     Vector2 horizontalInput;
 
     //Crouching
-    [SerializeField] Transform playerCamera;
+    GameObject playerCamera;
+    [SerializeField] Transform playerCapsule;
     bool crouch;
+
+    //Sprinting
+    bool sprint;
 
     //Jumping
     [SerializeField] float jumpHeight = 3.5f;
@@ -24,16 +32,20 @@ public class PlayerMovement : MonoBehaviour
     //Simulating gravity
     [SerializeField] float gravity = -30f; // -9.81
     Vector3 verticalVelocity = Vector3.zero;
-    
+
+    private void Awake()
+    {
+        walkSpeed = speed;
+        sprintSpeed = speed * 3f;
+        crouchSpeed = speed * 0.7f;
+
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
 
     private void Update()
     {
         GroundedCheck();
-    }
-
-    private void Crouch()
-    {
-        
+        Debug.Log(speed);
     }
 
     private void GroundedCheck()
@@ -76,17 +88,51 @@ public class PlayerMovement : MonoBehaviour
         jump = true;
     }
 
-    public void OnCrouch(bool crouchPressed)
+    public void OnCrouch()
     {
-        if (crouchPressed)
-        {
-            crouch = true;
-        }
-        else if (crouchPressed == false)
-        {
-            crouch = false;
-        }
+        crouch = !crouch;
 
-        Debug.Log("Crouch");
+        if (crouch)
+        {
+            float scale = 0.7f;
+            var newScale = playerCapsule.localScale;
+
+            controller.height = 1.4f; //Change the size of the player controller
+            newScale.y = scale;
+            playerCapsule.localScale = newScale; //Change the scale of the players capsule
+            speed = crouchSpeed; //Change the speed to accomodate the slower movement
+
+            var camPos = playerCamera.transform.position; 
+            camPos.y = controller.height;
+            playerCamera.transform.position = camPos; //Change the camera position to follow the shrink accordingly
+        }
+        else
+        {
+            float scale = 1.0f;
+            var newScale = playerCapsule.localScale;
+
+            controller.height = 2.0f; //Change the size of the player controller
+            newScale.y = scale; 
+            playerCapsule.localScale = newScale; //Change the scale of the players capsule
+            speed = walkSpeed; //Change the speed to go back to normal movement
+
+            var camPos = playerCamera.transform.position; 
+            camPos.y = controller.height - 1f;
+            playerCamera.transform.position = camPos; //Change the camera position to follow the shrink accordingly
+        }
+    }
+
+    public void OnSprint()
+    {
+        sprint = !sprint;
+
+        if (sprint)
+        {
+            speed = sprintSpeed;
+        }
+        else
+        {
+            speed = walkSpeed;
+        }
     }
 }

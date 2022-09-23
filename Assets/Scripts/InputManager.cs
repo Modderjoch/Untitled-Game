@@ -29,9 +29,10 @@ public class InputManager : MonoBehaviour
         movement.Jump.performed += _ => playerMovement.OnJump();
 
         //Get Crouch Input
+        movement.Crouch.performed += _ => playerMovement.OnCrouch();
 
-        movement.Crouch.performed += _ => playerMovement.OnCrouch(true);
-        movement.Crouch.canceled += _ => playerMovement.OnCrouch(false);
+        //Get Sprint Input
+        movement.Sprint.performed += _ => playerMovement.OnSprint();
 
         //Get Mouse Input
         movement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
