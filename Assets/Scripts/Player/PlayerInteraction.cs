@@ -14,8 +14,10 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField] private GameObject rightHand;
     private GameObject currentSelectedObject;
+    private GameObject currentHitObject;
 
     private bool handsFull;
+    private bool interactableIsHit;
 
     private void Awake()
     {
@@ -30,20 +32,24 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, rayRange)) //Check if the ray hits something
         {
-            if(hit.collider != null && hit.collider.tag == "Interactable") //Check if the hit object is an interactable
+            if(hit.collider != null && hit.collider.tag == "Interactable" && handsFull == false) //Check if the hit object is an interactable
             {
                 interactableName.text = hit.collider.name;
                 interactableCanvas.gameObject.SetActive(true);
-                currentSelectedObject = hit.collider.gameObject;
+                interactableIsHit = true;
+
+                currentHitObject = hit.collider.gameObject;
             }
             else
             {
                 interactableCanvas.gameObject.SetActive(false);
+                interactableIsHit = false;
             }
         }
         else
         {
             interactableCanvas.gameObject.SetActive(false);
+            interactableIsHit = false;
         }
     }
 
@@ -51,11 +57,15 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.Log("do something");
 
-        if(handsFull == false)
+        if(handsFull == false && interactableIsHit)
         {
+            currentSelectedObject = currentHitObject;
+            currentHitObject = null;
+
             currentSelectedObject.GetComponent<Rigidbody>().isKinematic = true;
             currentSelectedObject.transform.position = rightHand.transform.position;
             currentSelectedObject.transform.parent = rightHand.transform;
+
             handsFull = true;
         }
         else
@@ -69,6 +79,9 @@ public class PlayerInteraction : MonoBehaviour
         if(handsFull == true)
         currentSelectedObject.GetComponent<Rigidbody>().isKinematic = false;
         currentSelectedObject.transform.parent = null;
+
+        currentSelectedObject = null;
+        currentHitObject = null;
 
         handsFull = false;
     }
