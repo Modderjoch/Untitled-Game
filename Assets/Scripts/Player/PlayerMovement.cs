@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         GroundedCheck();
-        Debug.Log(speed);
     }
 
     private void GroundedCheck()
