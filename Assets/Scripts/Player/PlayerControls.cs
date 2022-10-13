@@ -264,6 +264,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""126d889c-ade6-4824-8c7c-bd57e81cc682"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -308,6 +317,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": ""Scale(factor=2)"",
                     ""groups"": """",
                     ""action"": ""MouseY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62c32448-8950-43fe-8c81-67be1e881a6c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be9595c3-19d0-44f5-bea8-68a7095a9820"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -396,6 +427,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MouseX = m_Camera.FindAction("MouseX", throwIfNotFound: true);
         m_Camera_MouseY = m_Camera.FindAction("MouseY", throwIfNotFound: true);
+        m_Camera_Switch = m_Camera.FindAction("Switch", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
@@ -518,12 +550,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_MouseX;
     private readonly InputAction m_Camera_MouseY;
+    private readonly InputAction m_Camera_Switch;
     public struct CameraActions
     {
         private @PlayerControls m_Wrapper;
         public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseX => m_Wrapper.m_Camera_MouseX;
         public InputAction @MouseY => m_Wrapper.m_Camera_MouseY;
+        public InputAction @Switch => m_Wrapper.m_Camera_Switch;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -539,6 +573,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MouseY.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMouseY;
                 @MouseY.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMouseY;
                 @MouseY.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMouseY;
+                @Switch.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnSwitch;
+                @Switch.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnSwitch;
+                @Switch.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnSwitch;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -549,6 +586,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MouseY.started += instance.OnMouseY;
                 @MouseY.performed += instance.OnMouseY;
                 @MouseY.canceled += instance.OnMouseY;
+                @Switch.started += instance.OnSwitch;
+                @Switch.performed += instance.OnSwitch;
+                @Switch.canceled += instance.OnSwitch;
             }
         }
     }
@@ -605,6 +645,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
+        void OnSwitch(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {

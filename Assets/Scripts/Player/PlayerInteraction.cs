@@ -26,6 +26,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
+
+
         Ray ray = (Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0))); //Create a ray from the center of the camera
 
         RaycastHit hit; //Store the hit information from the raycast

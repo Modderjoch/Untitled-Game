@@ -6,9 +6,13 @@ public class InputManager : MonoBehaviour
 {
 #pragma warning disable 649
 
+    //Player specific input
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerInteraction playerInteraction;
     [SerializeField] PlayerLook playerLook;
+
+    //Camera specific input
+    [SerializeField] CameraSwitch cameraSwitch;
 
     PlayerControls controls;
     PlayerControls.MovementActions movement;
@@ -36,6 +40,7 @@ public class InputManager : MonoBehaviour
         camera.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>(); //Get y-axis input
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        camera.Switch.performed += ctx => cameraSwitch.Switch(); //switch cameras
 
         //INTERACTION
         interaction.Interact.performed += _ => playerInteraction.OnInteract(); //Get interaction input
