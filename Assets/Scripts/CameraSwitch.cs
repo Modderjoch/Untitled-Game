@@ -8,7 +8,7 @@ public class CameraSwitch : MonoBehaviour
     public GameObject computerCamera;
 
     private bool fpsIsOn = true;
-    private bool compIsOn = false;
+    public bool compIsOn = false;
 
     // Call this function to disable FPS camera,
     // and enable overhead camera.

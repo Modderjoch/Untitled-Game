@@ -14,10 +14,12 @@ public class InputManager : MonoBehaviour
     //Camera specific input
     [SerializeField] CameraSwitch cameraSwitch;
 
+    //Computer input
+    [SerializeField] Computer computer;
+
     PlayerControls controls;
-    PlayerControls.MovementActions movement;
-    PlayerControls.CameraActions camera;
-    PlayerControls.InteractionActions interaction;
+    PlayerControls.PlayerActions player;
+    PlayerControls.ComputerActions computerA;
 
     Vector2 horizontalInput;
     Vector2 mouseInput;
@@ -25,26 +27,28 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerControls();
-        movement = controls.Movement;
-        camera = controls.Camera;
-        interaction = controls.Interaction;
+        player = controls.Player;
+        computerA = controls.Computer;
+
+        controls.Computer.Disable();
 
         //MOVEMENT
-        movement.Walking.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>(); //Get walking input (WASD)
-        movement.Jump.performed += _ => playerMovement.OnJump(); //Get jump input
-        //movement.Crouch.performed += _ => playerMovement.OnCrouch(); //Get crouch input
-        movement.Sprint.performed += _ => playerMovement.OnSprint(); //Get sprint input
+        player.Walking.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>(); //Get walking input (WASD)
+        player.Jump.performed += _ => playerMovement.OnJump(); //Get jump input
+        player.Sprint.performed += _ => playerMovement.OnSprint(); //Get sprint input
 
         //CAMERA
-        camera.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>(); //Get x-axis input
-        camera.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>(); //Get y-axis input
+        player.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>(); //Get x-axis input
+        player.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>(); //Get y-axis input
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        camera.Switch.performed += ctx => cameraSwitch.Switch(); //switch cameras
+        player.Switch.performed += ctx => cameraSwitch.Switch(); //switch cameras
 
         //INTERACTION
-        interaction.Interact.performed += _ => playerInteraction.OnInteract(); //Get interaction input
-        interaction.Drop.performed += _ => playerInteraction.OnDrop();
+        player.Interact.performed += _ => playerInteraction.OnInteract(); //Get interaction input
+
+        //COMPUTER INTERACTION
+        computerA.Exit.performed += _ => computer.OnExit();
     }
 
     private void Update()
@@ -61,5 +65,17 @@ public class InputManager : MonoBehaviour
     private void OnDestroy()
     {
         controls.Disable();
+    }
+
+    public void OnComputer()
+    {
+        controls.Player.Disable();
+        controls.Computer.Enable();
+    }
+
+    public void OffComputer()
+    {
+        controls.Player.Enable();
+        controls.Computer.Disable();
     }
 }
