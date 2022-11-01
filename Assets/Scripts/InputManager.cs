@@ -78,4 +78,24 @@ public class InputManager : MonoBehaviour
         controls.Player.Enable();
         controls.Computer.Disable();
     }
+
+    public void EnableDisableControl(string toEnable)
+    {
+        switch (toEnable)
+        {
+            case "main":
+                controls.Computer.Disable();
+                controls.Player.Enable();
+                break;
+
+            case "computer":
+                controls.Player.Disable();
+                controls.Computer.Enable();
+                break;
+
+            case null:
+                Debug.Log("No case");
+                break;
+        }
+    }
 }

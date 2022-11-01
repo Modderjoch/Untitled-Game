@@ -379,6 +379,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a46dd0ca-7e55-41f0-86a2-b6415691cd28"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseX"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6f98770b-c807-4f6c-8070-d9514c07499c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -403,6 +421,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45d975df-3c98-4990-bce6-7f2e95d2db32"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=16)"",
+                    ""groups"": """",
+                    ""action"": ""MouseX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a48e1e19-7b54-4815-bb69-b2341bebf020"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""MouseY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -422,6 +462,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Computer
         m_Computer = asset.FindActionMap("Computer", throwIfNotFound: true);
         m_Computer_Exit = m_Computer.FindAction("Exit", throwIfNotFound: true);
+        m_Computer_MouseY = m_Computer.FindAction("MouseY", throwIfNotFound: true);
+        m_Computer_MouseX = m_Computer.FindAction("MouseX", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -571,11 +613,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Computer;
     private IComputerActions m_ComputerActionsCallbackInterface;
     private readonly InputAction m_Computer_Exit;
+    private readonly InputAction m_Computer_MouseY;
+    private readonly InputAction m_Computer_MouseX;
     public struct ComputerActions
     {
         private @PlayerControls m_Wrapper;
         public ComputerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Exit => m_Wrapper.m_Computer_Exit;
+        public InputAction @MouseY => m_Wrapper.m_Computer_MouseY;
+        public InputAction @MouseX => m_Wrapper.m_Computer_MouseX;
         public InputActionMap Get() { return m_Wrapper.m_Computer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -588,6 +634,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Exit.started -= m_Wrapper.m_ComputerActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_ComputerActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_ComputerActionsCallbackInterface.OnExit;
+                @MouseY.started -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseY;
+                @MouseY.performed -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseY;
+                @MouseY.canceled -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseY;
+                @MouseX.started -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseX;
+                @MouseX.performed -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseX;
+                @MouseX.canceled -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseX;
             }
             m_Wrapper.m_ComputerActionsCallbackInterface = instance;
             if (instance != null)
@@ -595,6 +647,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
+                @MouseY.started += instance.OnMouseY;
+                @MouseY.performed += instance.OnMouseY;
+                @MouseY.canceled += instance.OnMouseY;
+                @MouseX.started += instance.OnMouseX;
+                @MouseX.performed += instance.OnMouseX;
+                @MouseX.canceled += instance.OnMouseX;
             }
         }
     }
@@ -613,5 +671,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IComputerActions
     {
         void OnExit(InputAction.CallbackContext context);
+        void OnMouseY(InputAction.CallbackContext context);
+        void OnMouseX(InputAction.CallbackContext context);
     }
 }

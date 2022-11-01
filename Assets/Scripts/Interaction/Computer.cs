@@ -18,7 +18,7 @@ public class Computer : MonoBehaviour, IInteractable
     {
         Debug.Log("Opening PC");
         cameraSwitch.Switch();
-        inputManager.OnComputer();
+        inputManager.EnableDisableControl("computer");
         return true;
     }
 
@@ -29,7 +29,7 @@ public class Computer : MonoBehaviour, IInteractable
         if (cameraSwitch.compIsOn)
         {
             cameraSwitch.Switch();
-            inputManager.OffComputer();
+            inputManager.EnableDisableControl("main");
         }        
     }
 }
