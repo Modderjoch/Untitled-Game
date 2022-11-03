@@ -7,6 +7,7 @@ public class Computer : MonoBehaviour, IInteractable
 {
     [SerializeField] CameraSwitch cameraSwitch;
     [SerializeField] InputManager inputManager;
+    [SerializeField] GameObject mainCanvas;
 
     [SerializeField] private string _prompt;
     [SerializeField] private string _name;
@@ -16,7 +17,7 @@ public class Computer : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteraction playerInteraction)
     {
-        Debug.Log("Opening PC");
+        mainCanvas.SetActive(false);
         cameraSwitch.Switch();
         inputManager.EnableDisableControl("computer");
         return true;
@@ -24,10 +25,9 @@ public class Computer : MonoBehaviour, IInteractable
 
     public void OnExit()
     {
-        Debug.Log("Exit PC");
-
         if (cameraSwitch.compIsOn)
         {
+            mainCanvas.SetActive(true);
             cameraSwitch.Switch();
             inputManager.EnableDisableControl("main");
         }        
