@@ -8,13 +8,12 @@ public class QuestLog : MonoBehaviour
 {
     [SerializeField] private GameObject questPrefab;
     [SerializeField] private Transform questList;
-
-    private Quest selected;
-
     [SerializeField] private TextMeshProUGUI questDescription;
+    [SerializeField] private TextMeshProUGUI questObjectiveReward;
+
+    private Quest selected;    
 
     private static QuestLog instance;
-
     public static QuestLog Instance
     {
         get
@@ -48,8 +47,8 @@ public class QuestLog : MonoBehaviour
             selected.QuestScript.Deselect();
         }
 
-        string objectives = "\nObjectives\n";
-        string rewards = "\nRewards\n";
+        string objectives = "\n<u><b>Objectives</b></u>\n";
+        string rewards = "\n<u><b>Rewards</b></u>\n";
 
         selected = quest;
 
@@ -64,7 +63,9 @@ public class QuestLog : MonoBehaviour
                 rewards += obj.rewardType[i] + ": " + obj.rewardAmount[i] + "\n";
             }
         }
-        questDescription.text = string.Format("<size=22>{0}</size>\n\n{1}\n{2}\n{3}", title, quest.Description, objectives, rewards);
+
+        questDescription.text = string.Format("<size=25>{0}</size>\n\n{1}\n", title, quest.Description);
+        questObjectiveReward.text = string.Format("\n\n{0}\n{1}\n", objectives, rewards);
     }
 
     public void DeleteEmptyObjective()
@@ -77,7 +78,6 @@ public class QuestLog : MonoBehaviour
             if (QuestGiver.Instance.quests[i].ProduceObjectives.Count == 0 && foundSender == QuestGiver.Instance.quests[i].Sender)
             {
                 QuestGiver.Instance.quests.RemoveAt(i);
-                questDescription.text = "";
                 go.GetComponent<QuestScript>().Deselect();
                 Destroy(go); 
             }
