@@ -8,11 +8,14 @@ public class PlayerProgression : MonoBehaviour
     [SerializeField] private int currency;
     [SerializeField] private int XP;
 
+    [SerializeField] private float sec = 2f;
+
     [SerializeField] private TextMeshProUGUI currencyText;
     [SerializeField] private TextMeshProUGUI XPText;
+    [SerializeField] private TextMeshProUGUI collectedText;
+    [SerializeField] private GameObject collectedPanel;
 
     private static PlayerProgression instance;
-
     public static PlayerProgression Instance
     {
         get
@@ -61,5 +64,21 @@ public class PlayerProgression : MonoBehaviour
     {
         XP += toAddAmount;
         XPText.text = XP.ToString();
+    }
+
+    public void CollectedPopup(string text)
+    {
+        collectedText.text = text;
+
+        StartCoroutine(DisablePopup(sec));
+    }
+
+    IEnumerator DisablePopup(float seconds)
+    {
+        collectedPanel.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(seconds);
+
+        collectedPanel.gameObject.SetActive(false);
     }
 }

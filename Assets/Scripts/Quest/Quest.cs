@@ -89,8 +89,11 @@ public abstract class Objective
     {
         quest = QuestLog.Instance.ReturnQuest();
         currentAmount += toAddAmount;
-
+        
         string receivedType = CheckCompletion();
+
+        string collect = ("collected " + toAddAmount + " kilos of " + Type);
+        PlayerProgression.Instance.CollectedPopup(collect);
 
         if (receivedType != null )
         {
