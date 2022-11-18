@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 public class PackedCoffee : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
-    [SerializeField] private string _name;
+    public string _name;
 
-    [SerializeField] private int amount;
-    [SerializeField] private string type;
+    public float amount;
+    public string type;
     [TextArea(2, 10)]
     [SerializeField] private string description;
 
@@ -28,7 +28,7 @@ public class PackedCoffee : MonoBehaviour, IInteractable
     {
         questLog = QuestLog.Instance;
 
-        labelTitle.text = type;
+        labelTitle.text = _name;
         labelWeight.text = amount.ToString() + " kilos";
         labelDescription.text = description;
     }
@@ -39,7 +39,7 @@ public class PackedCoffee : MonoBehaviour, IInteractable
 
         foreach (Objective obj in quest.ProduceObjectives)
         {
-            if(obj.Type.ToLower() == type.ToLower())
+            if(obj.Type.ToLower() == _name.ToLower())
             {
                 obj.UpdateAmount(amount);
                 questLog.ShowDescription(quest);

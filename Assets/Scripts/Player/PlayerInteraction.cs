@@ -11,7 +11,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private Canvas interactableCanvas;
     [SerializeField] private TMP_Text interactableName;
     [SerializeField] private TMP_Text interactablePrompt;
-    [SerializeField] private TMP_Text interactableWeight;
 
     [SerializeField] private float rayRange = 4f;
 

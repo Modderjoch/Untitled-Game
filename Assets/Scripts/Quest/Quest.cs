@@ -51,20 +51,20 @@ public class Quest
 [System.Serializable]
 public abstract class Objective
 {
-    [SerializeField] private int amountRequired;
-    [HideInInspector] public int currentAmount;
+    [SerializeField] private float amountRequired;
+    [HideInInspector] public float currentAmount;
     [SerializeField] private string type;
     [SerializeField] public string[] rewardType;
     [SerializeField] public int[] rewardAmount;
 
     private Quest quest;
 
-    public int AmountRequired
+    public float AmountRequired
     {
         get { return amountRequired; }
     }
 
-    public int CurrentAmount
+    public float CurrentAmount
     {
         get { return currentAmount; }
         set { currentAmount = value; }
@@ -85,7 +85,7 @@ public abstract class Objective
         get { return rewardAmount; }
     }
 
-    public void UpdateAmount(int toAddAmount)
+    public void UpdateAmount(float toAddAmount)
     {
         quest = QuestLog.Instance.ReturnQuest();
         currentAmount += toAddAmount;

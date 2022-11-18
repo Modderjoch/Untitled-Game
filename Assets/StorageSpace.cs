@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Football : MonoBehaviour, IInteractable
+public class StorageSpace : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private string _name;
@@ -11,9 +10,11 @@ public class Football : MonoBehaviour, IInteractable
     public string InteractionPrompt => _prompt;
     public string InteractionName => _name;
 
+    [SerializeField] HandInventory handInventory;
+
     public bool Interact(PlayerInteraction playerInteraction)
     {
-        Debug.Log("Picking up football");
+        handInventory.DropItem(transform.position, transform.rotation, transform);
         return true;
     }
 }
