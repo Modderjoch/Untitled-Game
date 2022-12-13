@@ -93,7 +93,7 @@ public abstract class Objective
         string receivedType = CheckCompletion();
 
         string collect = ("collected " + toAddAmount + " kilos of " + Type);
-        PlayerProgression.Instance.CollectedPopup(collect);
+        PlayerProgression.Instance.PopUp(collect, "collect");
 
         if (receivedType != null )
         {

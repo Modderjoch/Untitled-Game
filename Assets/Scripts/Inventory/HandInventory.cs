@@ -15,7 +15,7 @@ public class HandInventory : MonoBehaviour
 
     private Vector3 scale;
 
-    private void StoreCoffee()
+    public void StoreCoffee()
     {
         if (itemHolding.gameObject.GetComponent<RawCoffee>())
         {
@@ -42,6 +42,16 @@ public class HandInventory : MonoBehaviour
         }
     }
 
+    public GameObject ReturnObject()
+    {
+        if(itemHolding != null)
+        {
+            return itemHolding.gameObject;
+        }
+
+        return null;
+    }
+
     public void HoldItem(GameObject toHoldItem)
     {
         if (isHolding != true)
@@ -62,18 +72,58 @@ public class HandInventory : MonoBehaviour
         }
     }
 
+    public string ReturnName()
+    {
+        if (isHolding == true && itemHolding != null)
+        {
+            return coffeeName;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public float ReturnAmount()
+    {
+        if (isHolding == true && itemHolding != null)
+        {
+            return coffeeAmount;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+    public string ReturnType()
+    {
+        if (isHolding == true && itemHolding != null)
+        {
+            return coffeeType;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public void DropItem(Vector3 newPos, Quaternion newRot, Transform parent)
     {
-        itemHolding.SetParent(parent, true);
+        if(itemHolding != null)
+        {
+            itemHolding.SetParent(parent, true);
 
-        itemHolding.transform.localScale = scale;
+            itemHolding.transform.localScale = scale;
 
-        itemHolding.transform.position = newPos;
-        itemHolding.transform.rotation = newRot;
+            itemHolding.transform.position = newPos;
+            itemHolding.transform.rotation = newRot;
 
-        itemHolding.GetComponent<BoxCollider>().enabled = true;
-        itemHolding.tag = "Interactable";
+            itemHolding.GetComponent<BoxCollider>().enabled = true;
+            itemHolding.tag = "Interactable";
 
-        isHolding = false;
+            itemHolding = null;
+            isHolding = false;
+        }
     }
 }

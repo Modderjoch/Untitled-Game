@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PackedCoffee : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
+    [SerializeField] private string _prompt2;
     public string _name;
 
     public float amount;
@@ -22,6 +23,7 @@ public class PackedCoffee : MonoBehaviour, IInteractable
     [SerializeField] private TextMeshProUGUI labelWeight;
 
     public string InteractionPrompt => _prompt;
+    public string InteractionPrompt2 => _prompt2;
     public string InteractionName => _name;
 
     private void Awake()

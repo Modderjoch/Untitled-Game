@@ -7,14 +7,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    //UI
+    [Header("UI Objects")]
     [SerializeField] private Canvas interactableCanvas;
     [SerializeField] private TMP_Text interactableName;
     [SerializeField] private TMP_Text interactablePrompt;
+    [SerializeField] private TMP_Text interactablePrompt2;
+    [SerializeField] private GameObject promptPanel;
 
+    [Header("Raycast")]
     [SerializeField] private float rayRange = 4f;
 
     private bool interact;
+    private GameObject lastHit;
 
     private void Awake()
     {
@@ -31,9 +35,18 @@ public class PlayerInteraction : MonoBehaviour
             if(hit.collider != null && hit.collider.tag == "Interactable") //Check if the hit object is an interactable
             {
                 var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+                lastHit = hit.collider.gameObject;
+
+                if(hit.transform.gameObject.GetComponentInChildren<Outline>() != null)
+                {
+                    hit.transform.gameObject.GetComponentInChildren<Outline>().enabled = true;
+                }
 
                 interactableName.text = interactable.InteractionName;
                 interactablePrompt.text = interactable.InteractionPrompt;
+                interactablePrompt2.text = interactable.InteractionPrompt2;
+
+                if(interactablePrompt2.text != "") { promptPanel.SetActive(true); } else { promptPanel.SetActive(false); }
 
                 interactableCanvas.gameObject.SetActive(true);
 
@@ -41,13 +54,21 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     interactable.Interact(this);
                     interact = false;
+                    lastHit = null;
                 }
             }
         }
         else
         {
             interactableCanvas.gameObject.SetActive(false);
+            interactablePrompt2.text = null;
             interact = false;
+
+            if(lastHit != null && lastHit.GetComponentInChildren<Outline>() != null)
+            {
+                lastHit.transform.gameObject.GetComponentInChildren<Outline>().enabled = false;
+                lastHit = null;
+            }
         }
     }
 
