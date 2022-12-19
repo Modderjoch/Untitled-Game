@@ -18,4 +18,9 @@ public class CoffeePackage : MonoBehaviour, IInteractable
     {
         return true;
     }
+
+    public bool ExtraInteract(PlayerInteraction playerInteraction)
+    {
+        return true;
+    }
 }

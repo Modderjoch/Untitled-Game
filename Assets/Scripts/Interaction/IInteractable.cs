@@ -9,4 +9,5 @@ public interface IInteractable
     public string InteractionName { get; }
 
     public bool Interact(PlayerInteraction playerInteraction);
+    public bool ExtraInteract(PlayerInteraction playerInteraction);
 }

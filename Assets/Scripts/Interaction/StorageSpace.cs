@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class StorageSpace : MonoBehaviour, IInteractable
 {
@@ -12,11 +13,19 @@ public class StorageSpace : MonoBehaviour, IInteractable
     public string InteractionPrompt2 => _prompt2;
     public string InteractionName => _name;
 
+    public enum storageTypes {Normal, Raw, Packed, Bucket};
+    public storageTypes storageType;
+
     [SerializeField] HandInventory handInventory;
 
     public bool Interact(PlayerInteraction playerInteraction)
     {
-        handInventory.DropItem(transform.position, transform.rotation, transform);
+        handInventory.DropItem(transform.position, transform.rotation, transform, storageType.ToString());
+        return true;
+    }
+
+    public bool ExtraInteract(PlayerInteraction playerInteraction)
+    {
         return true;
     }
 }

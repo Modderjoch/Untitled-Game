@@ -41,6 +41,7 @@ public class PackedCoffee : MonoBehaviour, IInteractable
 
         foreach (Objective obj in quest.ProduceObjectives)
         {
+            if(obj != null)
             if(obj.Type.ToLower() == _name.ToLower())
             {
                 obj.UpdateAmount(amount);
@@ -48,6 +49,11 @@ public class PackedCoffee : MonoBehaviour, IInteractable
                 return true;
             }
         }
+        return true;
+    }
+
+    public bool ExtraInteract(PlayerInteraction playerInteraction)
+    {
         return true;
     }
 }

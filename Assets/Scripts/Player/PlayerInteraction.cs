@@ -18,6 +18,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float rayRange = 4f;
 
     private bool interact;
+    private bool extraInteract;
     private GameObject lastHit;
 
     private void Awake()
@@ -32,7 +33,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, rayRange)) //Check if the ray hits something
         {
-            if(hit.collider != null && hit.collider.tag == "Interactable") //Check if the hit object is an interactable
+            if(hit.collider != null && hit.collider.gameObject.CompareTag("Interactable")) //Check if the hit object is an interactable
             {
                 var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
                 lastHit = hit.collider.gameObject;
@@ -40,7 +41,7 @@ public class PlayerInteraction : MonoBehaviour
                 if(hit.transform.gameObject.GetComponentInChildren<Outline>() != null)
                 {
                     hit.transform.gameObject.GetComponentInChildren<Outline>().enabled = true;
-                }
+                } 
 
                 interactableName.text = interactable.InteractionName;
                 interactablePrompt.text = interactable.InteractionPrompt;
@@ -54,6 +55,11 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     interactable.Interact(this);
                     interact = false;
+                    lastHit = null;
+                } else if (interactable != null && extraInteract)
+                {
+                    interactable.ExtraInteract(this);
+                    extraInteract = false;
                     lastHit = null;
                 }
             }
@@ -75,5 +81,10 @@ public class PlayerInteraction : MonoBehaviour
     public void OnInteract()
     {
         interact = true;
+    }
+
+    public void OnExtraInteract()
+    {
+        extraInteract = true;
     }
 }

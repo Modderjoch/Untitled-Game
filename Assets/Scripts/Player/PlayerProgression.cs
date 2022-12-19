@@ -9,8 +9,9 @@ public class PlayerProgression : MonoBehaviour
     [Header("Base stats")]
     [SerializeField] private int currency;
     [SerializeField] private int XP;
-    [SerializeField] private int level = 0;
+    [SerializeField] private int level;
     [SerializeField] private int targetXP = 100;
+    private int totalXP = 0;
 
     [Header("Base stats UI")]
     [SerializeField] private TextMeshProUGUI currencyText;
@@ -46,9 +47,9 @@ public class PlayerProgression : MonoBehaviour
 
     private void Awake()
     {
-        currencyText.text = "€ " + currency.ToString();
-        XPText.text = XP.ToString() + "/" + targetXP;
-        levelText.text = level.ToString();
+        AddCurrency(0);
+        AddXP(0);
+        LevelUp(0);
 
         RefreshXP();
     }
@@ -81,20 +82,20 @@ public class PlayerProgression : MonoBehaviour
     public void AddCurrency(int toAddAmount)
     {
         currency += toAddAmount;
-        currencyText.text = "€ " + currency.ToString();
 
+        if (currency >= 1000) { currencyText.text = "€" + (currency / 1000f).ToString(("#.##") + "K").Replace(",", "."); } 
+        else { currencyText.text = "€ " + currency.ToString(); }
+        
         PopUp(toAddAmount.ToString(), "currency");
     }
 
     public void AddXP(int toAddAmount)
     {
-        XP += toAddAmount;
+        totalXP += toAddAmount;
+        LevelUp(Mathf.FloorToInt((totalXP/targetXP) - level));
+        XP = totalXP - (level * targetXP);
 
-        LevelUp(Mathf.FloorToInt(XP/targetXP));
-
-        XP -= level * targetXP;
         XPText.text = XP.ToString() + "/" + targetXP;
-
         RefreshXP();
         PopUp(toAddAmount.ToString(), "exp");
     }
@@ -106,20 +107,20 @@ public class PlayerProgression : MonoBehaviour
         XPBar.fillAmount = XP / maxXP;
     }
 
-    public void PopUp(string toAddAmount, string type)
+    public void PopUp(string toAddText, string type)
     {
         switch (type)
         {
             case "currency":
-                coinText.text = "+€" + toAddAmount;
+                coinText.text = "+€" + toAddText;
                 StartCoroutine(DisablePopup(sec, "currency"));
                 break;
             case "exp":
-                expText.text = "+" + toAddAmount + "XP";
+                expText.text = "+" + toAddText + "XP";
                 StartCoroutine(DisablePopup(sec, "exp"));
                 break;
             case "collect":
-                collectedText.text = toAddAmount;
+                collectedText.text = toAddText;
                 StartCoroutine(DisablePopup(collectSec, "collect"));
                 break;
             default:
@@ -152,29 +153,5 @@ public class PlayerProgression : MonoBehaviour
                 Debug.Log("Nothing found");
                 break;
         }
-
-        //if(type == "currency")
-        //{
-        //    coinPanel.gameObject.SetActive(true);
-        //    Debug.Log("currency popup");
-        //    yield return new WaitForSeconds(seconds);
-        //    coinPanel.gameObject.SetActive(false);
-        //}
-        //else if(type == "exp")
-        //{
-        //    expPanel.gameObject.SetActive(true);
-        //    yield return new WaitForSeconds(seconds);
-        //    expPanel.gameObject.SetActive(false);
-        //}
-        //else if(type == "collect")
-        //{
-        //    collectedPanel.gameObject.SetActive(true);
-        //    yield return new WaitForSeconds(seconds);
-        //    collectedPanel.gameObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    Debug.Log("Nothing found")
-        //}
     }
 }

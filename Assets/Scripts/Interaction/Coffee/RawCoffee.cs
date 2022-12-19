@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class RawCoffee : MonoBehaviour, IInteractable
 {
+    [Header("UI Prompts")]
     [SerializeField] private string _prompt;
     [SerializeField] private string _prompt2;
-    public string _name;
 
+    [Header("Details")]
+    public string _name;
     public float amount;
     public string type;
 
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI labelTitle;
     [SerializeField] private TextMeshProUGUI labelWeight;
 
+    [Header("Misc")]
     [SerializeField] HandInventory handInventory;
 
     public string InteractionPrompt => _prompt;
@@ -42,12 +46,18 @@ public class RawCoffee : MonoBehaviour, IInteractable
         if(amount <= 0)
         {
             Destroy(gameObject);
+            handInventory.ResetBool();
         }
     }
 
     public bool Interact(PlayerInteraction playerInteraction)
     {
         handInventory.HoldItem(gameObject);
+        return true;
+    }
+
+    public bool ExtraInteract(PlayerInteraction playerInteraction)
+    {
         return true;
     }
 }

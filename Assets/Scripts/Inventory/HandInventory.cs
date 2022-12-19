@@ -27,17 +27,28 @@ public class HandInventory : MonoBehaviour
 
             Debug.Log(coffeeName + coffeeAmount + coffeeType);
         }
-        else if (itemHolding.GetComponent<PackedCoffee>().enabled == true)
+        else if (itemHolding.gameObject.GetComponent<PackedCoffee>())
         {
-            PackedCoffee packedCoffee = GetComponent<PackedCoffee>();
+            PackedCoffee packedCoffee = itemHolding.gameObject.GetComponent<PackedCoffee>();
 
             coffeeName = packedCoffee.InteractionName;
             coffeeAmount = packedCoffee.amount;
             coffeeType = packedCoffee.type;
             Debug.Log(coffeeName + coffeeAmount + coffeeType);
         }
+        else if (itemHolding.gameObject.GetComponent<CoffeeBeans>())
+        {
+            CoffeeBeans coffeeBeans = itemHolding.gameObject.GetComponent<CoffeeBeans>();
+
+            coffeeName = coffeeBeans._name;
+            coffeeAmount = coffeeBeans.amount;
+            coffeeType = coffeeBeans.type;
+
+            Debug.Log(coffeeName + coffeeAmount + coffeeType);
+        }
         else
         {
+            Debug.Log("Couldn't access the details");
             return;
         }
     }
@@ -50,6 +61,11 @@ public class HandInventory : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void ResetBool()
+    {
+        isHolding = false;
     }
 
     public void HoldItem(GameObject toHoldItem)
@@ -108,9 +124,9 @@ public class HandInventory : MonoBehaviour
         }
     }
 
-    public void DropItem(Vector3 newPos, Quaternion newRot, Transform parent)
+    public void DropItem(Vector3 newPos, Quaternion newRot, Transform parent, string type)
     {
-        if(itemHolding != null)
+        if(itemHolding != null && type == coffeeType || itemHolding != null && type == "Normal")
         {
             itemHolding.SetParent(parent, true);
 
@@ -122,8 +138,17 @@ public class HandInventory : MonoBehaviour
             itemHolding.GetComponent<BoxCollider>().enabled = true;
             itemHolding.tag = "Interactable";
 
+            Debug.Log("Dropped: " + itemHolding.name);
+
             itemHolding = null;
             isHolding = false;
+        }
+        else
+        {
+            if (itemHolding == null)
+                Debug.Log("You are currently not holding an item");
+            else 
+                Debug.Log("This storage space was not meant for this type");
         }
     }
 }

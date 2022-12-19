@@ -25,6 +25,11 @@ public class Computer : MonoBehaviour, IInteractable
         return true;
     }
 
+    public bool ExtraInteract(PlayerInteraction playerInteraction)
+    {
+        return true;
+    }
+
     public void OnExit()
     {
         if (cameraSwitch.compIsOn)

@@ -63,10 +63,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb22469c840e37741ab6e8455f09fd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prompt: Press [E] to interact
+  _prompt: Press [E] to fill
+  _prompt2: Press [Q] to open the panel
   _name: Coffee Roast Machine
   capacity: 10
+  roastTime: 0
+  roastCanvas: {fileID: 0}
+  mainCanvas: {fileID: 0}
+  timerImage: {fileID: 0}
+  capacityImage: {fileID: 0}
+  typeImage: {fileID: 0}
+  headerText: {fileID: 0}
+  capacityText: {fileID: 0}
+  typeText: {fileID: 0}
+  timerText: {fileID: 0}
   handInventory: {fileID: 0}
+  beansPrefab: {fileID: 0}
+  beanHolder: {fileID: 0}
+  inputManager: {fileID: 0}
 --- !u!114 &8080521679928861382
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,20 +6,22 @@ public class InputManager : MonoBehaviour
 {
 #pragma warning disable 649
 
-    //Player specific input
+    [Header("Player Specific Scripts")]
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerInteraction playerInteraction;
     [SerializeField] PlayerLook playerLook;
 
-    //Camera specific input
+    [Header("Camera Specific Scripts")]
     [SerializeField] CameraSwitch cameraSwitch;
 
-    //Computer input
+    [Header("Misc Scripts")]
     [SerializeField] Computer computer;
+    [SerializeField] CoffeeRoaster coffeeRoaster;
 
     PlayerControls controls;
     PlayerControls.PlayerActions player;
-    PlayerControls.ComputerActions computerA;
+    PlayerControls.ComputerActions _computer;
+    PlayerControls.CoffeeRoasterActions _coffeeRoaster;
 
     Vector2 horizontalInput;
     Vector2 mouseInput;
@@ -28,9 +30,11 @@ public class InputManager : MonoBehaviour
     {
         controls = new PlayerControls();
         player = controls.Player;
-        computerA = controls.Computer;
+        _computer = controls.Computer;
+        _coffeeRoaster = controls.CoffeeRoaster;
 
         controls.Computer.Disable();
+        controls.CoffeeRoaster.Disable();
 
         //MOVEMENT
         player.Walking.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>(); //Get walking input (WASD)
@@ -46,9 +50,13 @@ public class InputManager : MonoBehaviour
 
         //INTERACTION
         player.Interact.performed += _ => playerInteraction.OnInteract(); //Get interaction input
+        player.ExtraInteract.performed += _ => playerInteraction.OnExtraInteract();
 
         //COMPUTER INTERACTION
-        computerA.Exit.performed += _ => computer.OnExit();
+        _computer.Exit.performed += _ => computer.OnExit();
+
+        //COFFEE ROASTER INTERACTION
+        _coffeeRoaster.Exit.performed += _ => coffeeRoaster.OnExit();
     }
 
     private void Update()
@@ -67,30 +75,26 @@ public class InputManager : MonoBehaviour
         controls.Disable();
     }
 
-    public void OnComputer()
-    {
-        controls.Player.Disable();
-        controls.Computer.Enable();
-    }
-
-    public void OffComputer()
-    {
-        controls.Player.Enable();
-        controls.Computer.Disable();
-    }
-
     public void EnableDisableControl(string toEnable)
     {
         switch (toEnable)
         {
             case "main":
                 controls.Computer.Disable();
+                controls.CoffeeRoaster.Disable();
                 controls.Player.Enable();
                 break;
 
             case "computer":
                 controls.Player.Disable();
+                controls.CoffeeRoaster.Disable();
                 controls.Computer.Enable();
+                break;
+
+            case "coffeeroaster":
+                controls.Player.Disable();
+                controls.Computer.Disable();
+                controls.CoffeeRoaster.Enable();
                 break;
 
             case null:
