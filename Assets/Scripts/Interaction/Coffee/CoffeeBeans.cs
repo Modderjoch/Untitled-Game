@@ -23,7 +23,20 @@ public class CoffeeBeans : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteraction playerInteraction)
     {
-        handInventory.HoldItem(gameObject);
+        if(handInventory.ReturnType() == "Bucket")
+        {
+            GameObject bucket = handInventory.ReturnObject();
+
+            if(bucket.GetComponent<Bucket>().FillBucket(amount, _name, type))
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("Could not fill the bucket");
+            }
+        }
+
         return true;
     }
 

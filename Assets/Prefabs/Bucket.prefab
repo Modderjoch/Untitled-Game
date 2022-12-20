@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 1154143592251650652}
   - component: {fileID: 1697555819325724075}
   - component: {fileID: 1697555819325724074}
+  - component: {fileID: 540058498707651431}
   m_Layer: 0
   m_Name: Bucket
   m_TagString: Interactable
@@ -500,9 +501,29 @@ MonoBehaviour:
   _prompt2: 
   _name: 
   amount: 0
-  type: 
+  type: Bucket
+  capacity: 30
+  labelTitle: {fileID: 1697555819732655352}
+  labelWeight: {fileID: 1697555820638395969}
   handInventory: {fileID: 0}
-  coffeeRoaster: {fileID: 0}
+--- !u!114 &540058498707651431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967940923585439974}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2251506224248319561
 GameObject:
   m_ObjectHideFlags: 0

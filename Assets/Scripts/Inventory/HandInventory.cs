@@ -46,6 +46,16 @@ public class HandInventory : MonoBehaviour
 
             Debug.Log(coffeeName + coffeeAmount + coffeeType);
         }
+        else if (itemHolding.gameObject.GetComponent<Bucket>())
+        {
+            Bucket bucket = itemHolding.gameObject.GetComponent<Bucket>();
+
+            coffeeName = bucket._name;
+            coffeeAmount = bucket.amount;
+            coffeeType = bucket.type;
+
+            Debug.Log(coffeeName + coffeeAmount + coffeeType);
+        }
         else
         {
             Debug.Log("Couldn't access the details");
