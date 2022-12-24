@@ -10,6 +10,7 @@ public class QuestLog : MonoBehaviour
     [SerializeField] private Transform questList;
     [SerializeField] private TextMeshProUGUI questDescription;
     [SerializeField] private TextMeshProUGUI questObjectiveReward;
+    [SerializeField] private TextMeshProUGUI questInfo;
 
     private Quest selected;    
 
@@ -47,12 +48,14 @@ public class QuestLog : MonoBehaviour
             selected.QuestScript.Deselect();
         }
 
-        string objectives = "\n<u><b>Objectives</b></u>\n";
-        string rewards = "\n<u><b>Rewards</b></u>\n";
+        string objectives = "<u><b>Objectives</b></u>\n";
+        string rewards = "<u><b>Rewards</b></u>\n";
 
         selected = quest;
 
         string title = quest.Title;
+        string sender = quest.Sender;
+        string date = quest.Date;
 
         foreach(Objective obj in quest.ProduceObjectives)
         {
@@ -64,8 +67,9 @@ public class QuestLog : MonoBehaviour
             }
         }
 
-        questDescription.text = string.Format("<size=25>{0}</size>\n\n{1}\n", title, quest.Description);
-        questObjectiveReward.text = string.Format("\n\n{0}\n{1}\n", objectives, rewards);
+        questDescription.text = string.Format("\n{0}\n", quest.Description);
+        questObjectiveReward.text = string.Format("{0}\n{1}\n", objectives, rewards);
+        questInfo.text = string.Format("\n{0}\n{1}\n{2}\n", title, sender, date);
     }
 
     public void DeleteEmptyObjective()

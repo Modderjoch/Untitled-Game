@@ -10,8 +10,6 @@ public class QuestScript : MonoBehaviour
 
     public void Select()
     {
-        GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
         QuestLog.Instance.ShowDescription(Quest);
     }
 
@@ -19,8 +17,6 @@ public class QuestScript : MonoBehaviour
     {
         if(this != null)
         {
-            GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-            GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
         }
     }
 }
