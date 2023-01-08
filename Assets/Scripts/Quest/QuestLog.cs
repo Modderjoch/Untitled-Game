@@ -53,6 +53,8 @@ public class QuestLog : MonoBehaviour
 
         selected = quest;
 
+        Debug.Log(selected);
+
         string title = quest.Title;
         string sender = quest.Sender;
         string date = quest.Date;
@@ -76,7 +78,7 @@ public class QuestLog : MonoBehaviour
     {
         for(int i = 0; i < QuestGiver.Instance.quests.Count; i++)
         {
-            GameObject go = GetComponentsInChildren<QuestScript>()[i].gameObject;
+            GameObject go = questList.gameObject.GetComponentsInChildren<QuestScript>()[i].gameObject;
             string foundSender = go.transform.Find("Sender").GetComponent<TextMeshProUGUI>().text;
 
             if (QuestGiver.Instance.quests[i].ProduceObjectives.Count == 0 && foundSender == QuestGiver.Instance.quests[i].Sender)
@@ -94,6 +96,6 @@ public class QuestLog : MonoBehaviour
 
     public Quest ReturnQuest()
     {
-        return selected;
+        return selected;       
     }
 }

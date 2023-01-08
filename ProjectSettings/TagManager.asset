@@ -8,6 +8,7 @@ TagManager:
   - Sender
   - Title
   - Date
+  - Window
   layers:
   - Default
   - TransparentFX

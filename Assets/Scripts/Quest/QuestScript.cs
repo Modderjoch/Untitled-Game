@@ -17,6 +17,7 @@ public class QuestScript : MonoBehaviour
     {
         if(this != null)
         {
+            Debug.Log("Deselected: " + Quest);
         }
     }
 }

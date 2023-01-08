@@ -36,8 +36,10 @@ public class PackedCoffee : MonoBehaviour, IInteractable
     }
 
     public bool Interact(PlayerInteraction playerInteraction)
-    { 
+    {
         quest = questLog.ReturnQuest();
+
+        Debug.Log(quest);
 
         foreach (Objective obj in quest.ProduceObjectives)
         {
