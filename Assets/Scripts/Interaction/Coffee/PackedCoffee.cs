@@ -39,8 +39,6 @@ public class PackedCoffee : MonoBehaviour, IInteractable
     {
         quest = questLog.ReturnQuest();
 
-        Debug.Log(quest);
-
         foreach (Objective obj in quest.ProduceObjectives)
         {
             if(obj != null)

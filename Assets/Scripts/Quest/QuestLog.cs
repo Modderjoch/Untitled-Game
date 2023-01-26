@@ -53,8 +53,6 @@ public class QuestLog : MonoBehaviour
 
         selected = quest;
 
-        Debug.Log(selected);
-
         string title = quest.Title;
         string sender = quest.Sender;
         string date = quest.Date;
@@ -74,6 +72,15 @@ public class QuestLog : MonoBehaviour
         questInfo.text = string.Format("\n{0}\n{1}\n{2}\n", title, sender, date);
     }
 
+    private void ClearDescription()
+    {
+        questDescription.text = "";
+        questObjectiveReward.text = "";
+        questInfo.text = "";
+
+        Debug.Log("Cleared Description" + questDescription.text + " " + questObjectiveReward.text + " " + questInfo);
+    }
+
     public void DeleteEmptyObjective()
     {
         for(int i = 0; i < QuestGiver.Instance.quests.Count; i++)
@@ -89,7 +96,7 @@ public class QuestLog : MonoBehaviour
             }
             else
             {
-                Debug.Log("Sender not found");
+                ClearDescription();
             }
         }
     }
