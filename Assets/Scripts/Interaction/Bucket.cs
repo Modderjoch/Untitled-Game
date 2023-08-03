@@ -15,7 +15,7 @@ public class Bucket : MonoBehaviour, IInteractable
     public float amount;
     public string type;
     [Range(0, 50)] public int capacity;
-    private string subType;
+    public string subType;
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI labelTitle;
@@ -30,6 +30,8 @@ public class Bucket : MonoBehaviour, IInteractable
 
     private void Awake()
     {
+        handInventory = GameObject.Find("Player").GetComponent<HandInventory>();
+
         labelTitle.text = _name;
         labelWeight.text = amount.ToString() + " kg";
     }

@@ -5,9 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Computer : MonoBehaviour, IInteractable
 {
-    [SerializeField] CameraSwitch cameraSwitch;
     [SerializeField] InputManager inputManager;
     [SerializeField] GameObject mainCanvas;
+    [SerializeField] Camera camera;
+    private Camera mainCam;
 
     [SerializeField] private string _prompt;
     [SerializeField] private string _prompt2;
@@ -17,10 +18,15 @@ public class Computer : MonoBehaviour, IInteractable
     public string InteractionPrompt2 => _prompt2;
     public string InteractionName => _name;
 
+    private void Awake()
+    {
+        mainCam = Camera.main;
+    }
+
     public bool Interact(PlayerInteraction playerInteraction)
     {
         mainCanvas.SetActive(false);
-        cameraSwitch.Switch();
+        mainCam.GetComponent<CameraSwitcher>().SwitchToCamera(camera);
         inputManager.EnableDisableControl("computer");
         return true;
     }
@@ -32,11 +38,11 @@ public class Computer : MonoBehaviour, IInteractable
 
     public void OnExit()
     {
-        if (cameraSwitch.compIsOn)
-        {
-            mainCanvas.SetActive(true);
-            cameraSwitch.Switch();
-            inputManager.EnableDisableControl("main");
-        }        
+        mainCam.GetComponent<CameraSwitcher>().ReturnToMain();
+
+        mainCanvas.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

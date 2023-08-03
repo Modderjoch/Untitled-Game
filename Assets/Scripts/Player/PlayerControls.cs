@@ -524,6 +524,96 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Packaging"",
+            ""id"": ""42654aed-447c-4795-bdda-42b729479ccb"",
+            ""actions"": [
+                {
+                    ""name"": ""MouseX"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1aeb9a34-8363-408e-b5ab-0548f8502f0c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""0ea3ae46-6b36-47ca-a52e-cd11b75c4b01"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb3b1463-b3f9-4e85-9765-500df9d07e3f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6ea2539c-bb3a-453c-a5cb-b07a7e5dd7ea"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f26fb03-146f-498a-bc72-4c5e3b400909"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db9552d2-63cd-4751-b248-a9b0ec6f59ba"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""010b2252-997d-4c07-a88d-0b6236bd16e1"",
+                    ""path"": ""<Gamepad>/rightStick/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""MouseY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4230762-8cf2-49f8-a450-fa9e360f2154"",
+                    ""path"": ""<Gamepad>/rightStick/x"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=16)"",
+                    ""groups"": """",
+                    ""action"": ""MouseX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -548,6 +638,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_CoffeeRoaster_MouseX = m_CoffeeRoaster.FindAction("MouseX", throwIfNotFound: true);
         m_CoffeeRoaster_MouseY = m_CoffeeRoaster.FindAction("MouseY", throwIfNotFound: true);
         m_CoffeeRoaster_Exit = m_CoffeeRoaster.FindAction("Exit", throwIfNotFound: true);
+        // Packaging
+        m_Packaging = asset.FindActionMap("Packaging", throwIfNotFound: true);
+        m_Packaging_MouseX = m_Packaging.FindAction("MouseX", throwIfNotFound: true);
+        m_Packaging_MouseY = m_Packaging.FindAction("MouseY", throwIfNotFound: true);
+        m_Packaging_Exit = m_Packaging.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -790,6 +885,55 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CoffeeRoasterActions @CoffeeRoaster => new CoffeeRoasterActions(this);
+
+    // Packaging
+    private readonly InputActionMap m_Packaging;
+    private IPackagingActions m_PackagingActionsCallbackInterface;
+    private readonly InputAction m_Packaging_MouseX;
+    private readonly InputAction m_Packaging_MouseY;
+    private readonly InputAction m_Packaging_Exit;
+    public struct PackagingActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PackagingActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseX => m_Wrapper.m_Packaging_MouseX;
+        public InputAction @MouseY => m_Wrapper.m_Packaging_MouseY;
+        public InputAction @Exit => m_Wrapper.m_Packaging_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Packaging; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PackagingActions set) { return set.Get(); }
+        public void SetCallbacks(IPackagingActions instance)
+        {
+            if (m_Wrapper.m_PackagingActionsCallbackInterface != null)
+            {
+                @MouseX.started -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseX;
+                @MouseX.performed -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseX;
+                @MouseX.canceled -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseX;
+                @MouseY.started -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseY;
+                @MouseY.performed -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseY;
+                @MouseY.canceled -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseY;
+                @Exit.started -= m_Wrapper.m_PackagingActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_PackagingActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_PackagingActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_PackagingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MouseX.started += instance.OnMouseX;
+                @MouseX.performed += instance.OnMouseX;
+                @MouseX.canceled += instance.OnMouseX;
+                @MouseY.started += instance.OnMouseY;
+                @MouseY.performed += instance.OnMouseY;
+                @MouseY.canceled += instance.OnMouseY;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public PackagingActions @Packaging => new PackagingActions(this);
     public interface IPlayerActions
     {
         void OnWalking(InputAction.CallbackContext context);
@@ -808,6 +952,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMouseX(InputAction.CallbackContext context);
     }
     public interface ICoffeeRoasterActions
+    {
+        void OnMouseX(InputAction.CallbackContext context);
+        void OnMouseY(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
+    }
+    public interface IPackagingActions
     {
         void OnMouseX(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);

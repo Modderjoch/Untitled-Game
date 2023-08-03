@@ -15,6 +15,7 @@ public class CoffeeRoaster : MonoBehaviour, IInteractable
     [SerializeField] private string _name;
     [SerializeField] private float capacity;
     [SerializeField] [Range(1, 60)] private int roastTime;
+    [SerializeField] float beanLoss = .85f;
     private float origCapacity;
     private float usedCapacity;
 
@@ -102,7 +103,7 @@ public class CoffeeRoaster : MonoBehaviour, IInteractable
             var beanComponent = beansPrefab.GetComponent<CoffeeBeans>();
             beanComponent.type = "Beans";
             beanComponent._name = typeText.text;
-            beanComponent.amount = usedCapacity * Random.Range(.80f, .88f);
+            beanComponent.amount = usedCapacity * beanLoss;
             beanComponent.handInventory = handInventory;
             beanComponent.coffeeRoaster = this;
             Instantiate(beansPrefab, beanHolder);
@@ -118,7 +119,6 @@ public class CoffeeRoaster : MonoBehaviour, IInteractable
         roastCanvas.SetActive(false);
         mainCanvas.SetActive(true);
         inputManager.EnableDisableControl("main");
-
     }
 
     private void FillRoaster()

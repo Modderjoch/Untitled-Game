@@ -17,11 +17,13 @@ public class InputManager : MonoBehaviour
     [Header("Misc Scripts")]
     [SerializeField] Computer computer;
     [SerializeField] CoffeeRoaster coffeeRoaster;
+    [SerializeField] Packaging packaging;
 
     PlayerControls controls;
     PlayerControls.PlayerActions player;
     PlayerControls.ComputerActions _computer;
     PlayerControls.CoffeeRoasterActions _coffeeRoaster;
+    PlayerControls.PackagingActions _packaging;
 
     Vector2 horizontalInput;
     Vector2 mouseInput;
@@ -32,9 +34,11 @@ public class InputManager : MonoBehaviour
         player = controls.Player;
         _computer = controls.Computer;
         _coffeeRoaster = controls.CoffeeRoaster;
+        _packaging = controls.Packaging;
 
         controls.Computer.Disable();
         controls.CoffeeRoaster.Disable();
+        controls.Packaging.Disable();
 
         //MOVEMENT
         player.Walking.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>(); //Get walking input (WASD)
@@ -57,6 +61,9 @@ public class InputManager : MonoBehaviour
 
         //COFFEE ROASTER INTERACTION
         _coffeeRoaster.Exit.performed += _ => coffeeRoaster.OnExit();
+
+        //PACKAGING INTERACTION
+        _packaging.Exit.performed += _ => packaging.OnExit();
     }
 
     private void Update()
@@ -77,24 +84,28 @@ public class InputManager : MonoBehaviour
 
     public void EnableDisableControl(string toEnable)
     {
-        switch (toEnable)
+        switch (toEnable.ToLower())
         {
             case "main":
                 controls.Computer.Disable();
                 controls.CoffeeRoaster.Disable();
+                controls.Packaging.Disable();
                 controls.Player.Enable();
                 break;
 
             case "computer":
                 controls.Player.Disable();
-                controls.CoffeeRoaster.Disable();
                 controls.Computer.Enable();
                 break;
 
             case "coffeeroaster":
                 controls.Player.Disable();
-                controls.Computer.Disable();
                 controls.CoffeeRoaster.Enable();
+                break;
+
+            case "packaging":
+                controls.Player.Disable();
+                controls.Packaging.Enable();
                 break;
 
             case null:

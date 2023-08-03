@@ -13,7 +13,7 @@ public class StorageSpace : MonoBehaviour, IInteractable
     public string InteractionPrompt2 => _prompt2;
     public string InteractionName => _name;
 
-    public enum storageTypes {Normal, Raw, Packed, Bucket};
+    public enum storageTypes {Normal, Raw, Packed, Bucket, Bag};
     public storageTypes storageType;
 
     [SerializeField] HandInventory handInventory;

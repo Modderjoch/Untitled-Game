@@ -19,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private bool interact;
     private bool extraInteract;
+    public bool disableInteract;
     private GameObject lastHit;
 
     private void Awake()
@@ -28,52 +29,56 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        Ray ray = (Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0))); //Create a ray from the center of the camera
-        RaycastHit hit; //Store the hit information from the raycast
-
-        if (Physics.Raycast(ray, out hit, rayRange)) //Check if the ray hits something
+        if (disableInteract == false)
         {
-            if(hit.collider != null && hit.collider.gameObject.CompareTag("Interactable")) //Check if the hit object is an interactable
+            Ray ray = (Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0))); //Create a ray from the center of the camera
+            RaycastHit hit; //Store the hit information from the raycast
+
+            if (Physics.Raycast(ray, out hit, rayRange)) //Check if the ray hits something
             {
-                var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
-                lastHit = hit.collider.gameObject;
-
-                if(hit.transform.gameObject.GetComponentInChildren<Outline>() != null)
+                if (hit.collider != null && hit.collider.gameObject.CompareTag("Interactable")) //Check if the hit object is an interactable
                 {
-                    hit.transform.gameObject.GetComponentInChildren<Outline>().enabled = true;
-                } 
+                    var interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+                    lastHit = hit.collider.gameObject;
 
-                interactableName.text = interactable.InteractionName;
-                interactablePrompt.text = interactable.InteractionPrompt;
-                interactablePrompt2.text = interactable.InteractionPrompt2;
+                    if (hit.transform.gameObject.GetComponentInChildren<Outline>() != null)
+                    {
+                        hit.transform.gameObject.GetComponentInChildren<Outline>().enabled = true;
+                    }
 
-                if(interactablePrompt2.text != "") { promptPanel.SetActive(true); } else { promptPanel.SetActive(false); }
+                    interactableName.text = interactable.InteractionName;
+                    interactablePrompt.text = interactable.InteractionPrompt;
+                    interactablePrompt2.text = interactable.InteractionPrompt2;
 
-                interactableCanvas.gameObject.SetActive(true);
+                    if (interactablePrompt2.text != "") { promptPanel.SetActive(true); } else { promptPanel.SetActive(false); }
 
-                if (interactable != null && interact)
-                {
-                    interactable.Interact(this);
-                    interact = false;
-                    lastHit = null;
-                } else if (interactable != null && extraInteract)
-                {
-                    interactable.ExtraInteract(this);
-                    extraInteract = false;
-                    lastHit = null;
+                    interactableCanvas.gameObject.SetActive(true);
+
+                    if (interactable != null && interact)
+                    {
+                        interactable.Interact(this);
+                        interact = false;
+                        lastHit = null;
+                    }
+                    else if (interactable != null && extraInteract)
+                    {
+                        interactable.ExtraInteract(this);
+                        extraInteract = false;
+                        lastHit = null;
+                    }
                 }
             }
-        }
-        else
-        {
-            interactableCanvas.gameObject.SetActive(false);
-            interactablePrompt2.text = null;
-            interact = false;
-
-            if(lastHit != null && lastHit.GetComponentInChildren<Outline>() != null)
+            else
             {
-                lastHit.transform.gameObject.GetComponentInChildren<Outline>().enabled = false;
-                lastHit = null;
+                interactableCanvas.gameObject.SetActive(false);
+                interactablePrompt2.text = null;
+                interact = false;
+
+                if (lastHit != null && lastHit.GetComponentInChildren<Outline>() != null)
+                {
+                    lastHit.transform.gameObject.GetComponentInChildren<Outline>().enabled = false;
+                    lastHit = null;
+                }
             }
         }
     }
