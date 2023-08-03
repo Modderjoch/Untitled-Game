@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584306c989efda74e8fcceaf5d91758e, type: 3}
+  m_Name: Brazil
+  m_EditorClassIdentifier: 
+  coffeeName: Brazil
+  description: 'Brazil is the world''s leading grower and exporter of coffee beans,
+    with a mellow flavor that makes for a very typical dark roast.  '
+  image: {fileID: 21300000, guid: b2d94146d99d2944f8d5322aef755c4c, type: 3}
+  weight: 10
+  pricePerKG: 50
+  moistureLevel: 3
+  roastLevel: 0
+  grindLevel: 0
+  type: 0

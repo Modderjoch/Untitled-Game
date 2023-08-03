@@ -17,58 +17,58 @@ public class HandInventory : MonoBehaviour
 
     public void StoreCoffee()
     {
-        if (itemHolding.gameObject.GetComponent<RawCoffee>())
-        {
-            RawCoffee rawCoffee = itemHolding.gameObject.GetComponent<RawCoffee>();
+        //if (itemHolding.gameObject.GetComponent<RawCoffee>())
+        //{
+        //    RawCoffee rawCoffee = itemHolding.gameObject.GetComponent<RawCoffee>();
 
-            coffeeName = rawCoffee.InteractionName;
-            coffeeAmount = rawCoffee.amount;
-            coffeeType = rawCoffee.type;
+        //    coffeeName = rawCoffee.InteractionName;
+        //    coffeeAmount = rawCoffee.amount;
+        //    coffeeType = rawCoffee.type;
 
-            Debug.Log(coffeeName + coffeeAmount + coffeeType);
-        }
-        else if (itemHolding.gameObject.GetComponent<PackedCoffee>())
-        {
-            PackedCoffee packedCoffee = itemHolding.gameObject.GetComponent<PackedCoffee>();
+        //    Debug.Log(coffeeName + coffeeAmount + coffeeType);
+        //}
+        //else if (itemHolding.gameObject.GetComponent<PackedCoffee>())
+        //{
+        //    PackedCoffee packedCoffee = itemHolding.gameObject.GetComponent<PackedCoffee>();
 
-            coffeeName = packedCoffee.InteractionName;
-            coffeeAmount = packedCoffee.amount;
-            coffeeType = packedCoffee.type;
-            Debug.Log(coffeeName + coffeeAmount + coffeeType);
-        }
-        else if (itemHolding.gameObject.GetComponent<CoffeeBeans>())
-        {
-            CoffeeBeans coffeeBeans = itemHolding.gameObject.GetComponent<CoffeeBeans>();
+        //    coffeeName = packedCoffee.InteractionName;
+        //    coffeeAmount = packedCoffee.amount;
+        //    coffeeType = packedCoffee.type;
+        //    Debug.Log(coffeeName + coffeeAmount + coffeeType);
+        //}
+        //else if (itemHolding.gameObject.GetComponent<CoffeeBeans>())
+        //{
+        //    CoffeeBeans coffeeBeans = itemHolding.gameObject.GetComponent<CoffeeBeans>();
 
-            coffeeName = coffeeBeans._name;
-            coffeeAmount = coffeeBeans.amount;
-            coffeeType = coffeeBeans.type;
+        //    coffeeName = coffeeBeans._name;
+        //    coffeeAmount = coffeeBeans.amount;
+        //    coffeeType = coffeeBeans.type;
 
-            Debug.Log(coffeeName + coffeeAmount + coffeeType);
-        }
-        else if (itemHolding.gameObject.GetComponent<Bucket>())
-        {
-            Bucket bucket = itemHolding.gameObject.GetComponent<Bucket>();
+        //    Debug.Log(coffeeName + coffeeAmount + coffeeType);
+        //}
+        //else if (itemHolding.gameObject.GetComponent<Bucket>())
+        //{
+        //    Bucket bucket = itemHolding.gameObject.GetComponent<Bucket>();
 
-            coffeeName = bucket._name;
-            coffeeAmount = bucket.amount;
-            coffeeType = bucket.type;
+        //    coffeeName = bucket._name;
+        //    coffeeAmount = bucket.amount;
+        //    coffeeType = bucket.type;
 
-            Debug.Log(coffeeName + coffeeAmount + coffeeType);
-        }
-        else if (itemHolding.gameObject.GetComponent<CoffeePackage>())
-        {
-            CoffeePackage coffeePackage = itemHolding.gameObject.GetComponent<CoffeePackage>();
+        //    Debug.Log(coffeeName + coffeeAmount + coffeeType);
+        //}
+        //else if (itemHolding.gameObject.GetComponent<CoffeePackage>())
+        //{
+        //    CoffeePackage coffeePackage = itemHolding.gameObject.GetComponent<CoffeePackage>();
 
-            coffeeName = coffeePackage.InteractionName;
-            coffeeAmount = 0;
-            coffeeType = coffeePackage.InteractionName;
-        }
-        else
-        {
-            Debug.Log("Couldn't access the details");
-            return;
-        }
+        //    coffeeName = coffeePackage.InteractionName;
+        //    coffeeAmount = 0;
+        //    coffeeType = coffeePackage.InteractionName;
+        //}
+        //else
+        //{
+        //    Debug.Log("Couldn't access the details");
+        //    return;
+        //}
     }
 
     public GameObject ReturnObject()

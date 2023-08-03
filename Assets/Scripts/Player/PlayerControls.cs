@@ -368,13 +368,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Computer"",
-            ""id"": ""a006f9d5-7545-4e52-b95a-cbcff992cbde"",
+            ""name"": ""UI"",
+            ""id"": ""212a06ae-595d-4679-811a-6f409030a9aa"",
             ""actions"": [
                 {
                     ""name"": ""Exit"",
                     ""type"": ""Button"",
-                    ""id"": ""d7955a31-0f57-4e63-8c56-000e721225ba"",
+                    ""id"": ""aabecd09-2fba-40ee-b400-e32ba99311b6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -383,7 +383,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""MouseY"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""a46dd0ca-7e55-41f0-86a2-b6415691cd28"",
+                    ""id"": ""eef372ff-5bbe-435c-9192-73ce5c7c014d"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -392,7 +392,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""MouseX"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""6f98770b-c807-4f6c-8070-d9514c07499c"",
+                    ""id"": ""fef4fb4d-82db-403b-85d3-d69315775126"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -402,7 +402,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""bb8df647-62fe-4299-ae7c-338a2bf9b8e7"",
+                    ""id"": ""54302baf-a097-4943-a3b0-7d53f9340e4c"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -413,7 +413,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""99ab652a-c29a-4d5d-b85b-eea880a661eb"",
+                    ""id"": ""3cb15745-12e2-410d-89d2-1de0bd3d481f"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -424,7 +424,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""45d975df-3c98-4990-bce6-7f2e95d2db32"",
+                    ""id"": ""b26f3605-f5dd-41ec-b068-467230d44f21"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87fc5e8a-ec89-4a6a-8f4a-234294c3c431"",
                     ""path"": ""<Gamepad>/rightStick/x"",
                     ""interactions"": """",
                     ""processors"": ""Scale(factor=16)"",
@@ -435,78 +446,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a48e1e19-7b54-4815-bb69-b2341bebf020"",
-                    ""path"": ""<Gamepad>/rightStick/y"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale(factor=2)"",
-                    ""groups"": """",
-                    ""action"": ""MouseY"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Coffee Roaster"",
-            ""id"": ""1842fdc7-c778-4e10-abbf-4c1fbc0d1896"",
-            ""actions"": [
-                {
-                    ""name"": ""MouseX"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""f1a6f02e-6ea1-41e2-82ba-9ebf2ea74102"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MouseY"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""d75db892-3e33-495b-b093-0561f060e172"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Exit"",
-                    ""type"": ""Button"",
-                    ""id"": ""5038c5b5-70b6-4627-9bb2-e36f82ecedb8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5f07bd69-d91e-4ed4-89ed-f43ea923e755"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""34e43662-cf95-44a4-b23f-583511c0ef2b"",
+                    ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c4c40c9f-f241-4e4c-a328-a3926c659e99"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e90953d8-acd6-4bf4-8a72-3e20a80c0cb0"",
-                    ""path"": ""<Gamepad>/rightStick/y"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale(factor=2)"",
                     ""groups"": """",
                     ""action"": ""MouseY"",
                     ""isComposite"": false,
@@ -514,102 +457,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""12d96e0e-ca86-4fda-9852-47e0630698c3"",
-                    ""path"": ""<Gamepad>/rightStick/x"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale(factor=16)"",
-                    ""groups"": """",
-                    ""action"": ""MouseX"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Packaging"",
-            ""id"": ""42654aed-447c-4795-bdda-42b729479ccb"",
-            ""actions"": [
-                {
-                    ""name"": ""MouseX"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""1aeb9a34-8363-408e-b5ab-0548f8502f0c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MouseY"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""0ea3ae46-6b36-47ca-a52e-cd11b75c4b01"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Exit"",
-                    ""type"": ""Button"",
-                    ""id"": ""eb3b1463-b3f9-4e85-9765-500df9d07e3f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""6ea2539c-bb3a-453c-a5cb-b07a7e5dd7ea"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6f26fb03-146f-498a-bc72-4c5e3b400909"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""db9552d2-63cd-4751-b248-a9b0ec6f59ba"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""010b2252-997d-4c07-a88d-0b6236bd16e1"",
+                    ""id"": ""04da2748-6047-47f4-8847-fb8f04b1a4db"",
                     ""path"": ""<Gamepad>/rightStick/y"",
                     ""interactions"": """",
                     ""processors"": ""Scale(factor=2)"",
                     ""groups"": """",
                     ""action"": ""MouseY"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a4230762-8cf2-49f8-a450-fa9e360f2154"",
-                    ""path"": ""<Gamepad>/rightStick/x"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale(factor=16)"",
-                    ""groups"": """",
-                    ""action"": ""MouseX"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -628,21 +481,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Switch = m_Player.FindAction("Switch", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_ExtraInteract = m_Player.FindAction("ExtraInteract", throwIfNotFound: true);
-        // Computer
-        m_Computer = asset.FindActionMap("Computer", throwIfNotFound: true);
-        m_Computer_Exit = m_Computer.FindAction("Exit", throwIfNotFound: true);
-        m_Computer_MouseY = m_Computer.FindAction("MouseY", throwIfNotFound: true);
-        m_Computer_MouseX = m_Computer.FindAction("MouseX", throwIfNotFound: true);
-        // Coffee Roaster
-        m_CoffeeRoaster = asset.FindActionMap("Coffee Roaster", throwIfNotFound: true);
-        m_CoffeeRoaster_MouseX = m_CoffeeRoaster.FindAction("MouseX", throwIfNotFound: true);
-        m_CoffeeRoaster_MouseY = m_CoffeeRoaster.FindAction("MouseY", throwIfNotFound: true);
-        m_CoffeeRoaster_Exit = m_CoffeeRoaster.FindAction("Exit", throwIfNotFound: true);
-        // Packaging
-        m_Packaging = asset.FindActionMap("Packaging", throwIfNotFound: true);
-        m_Packaging_MouseX = m_Packaging.FindAction("MouseX", throwIfNotFound: true);
-        m_Packaging_MouseY = m_Packaging.FindAction("MouseY", throwIfNotFound: true);
-        m_Packaging_Exit = m_Packaging.FindAction("Exit", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
+        m_UI_MouseY = m_UI.FindAction("MouseY", throwIfNotFound: true);
+        m_UI_MouseX = m_UI.FindAction("MouseX", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -788,39 +631,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // Computer
-    private readonly InputActionMap m_Computer;
-    private IComputerActions m_ComputerActionsCallbackInterface;
-    private readonly InputAction m_Computer_Exit;
-    private readonly InputAction m_Computer_MouseY;
-    private readonly InputAction m_Computer_MouseX;
-    public struct ComputerActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Exit;
+    private readonly InputAction m_UI_MouseY;
+    private readonly InputAction m_UI_MouseX;
+    public struct UIActions
     {
         private @PlayerControls m_Wrapper;
-        public ComputerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Exit => m_Wrapper.m_Computer_Exit;
-        public InputAction @MouseY => m_Wrapper.m_Computer_MouseY;
-        public InputAction @MouseX => m_Wrapper.m_Computer_MouseX;
-        public InputActionMap Get() { return m_Wrapper.m_Computer; }
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Exit => m_Wrapper.m_UI_Exit;
+        public InputAction @MouseY => m_Wrapper.m_UI_MouseY;
+        public InputAction @MouseX => m_Wrapper.m_UI_MouseX;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ComputerActions set) { return set.Get(); }
-        public void SetCallbacks(IComputerActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_ComputerActionsCallbackInterface != null)
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Exit.started -= m_Wrapper.m_ComputerActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_ComputerActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_ComputerActionsCallbackInterface.OnExit;
-                @MouseY.started -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseY;
-                @MouseY.performed -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseY;
-                @MouseY.canceled -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseY;
-                @MouseX.started -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseX;
-                @MouseX.performed -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseX;
-                @MouseX.canceled -= m_Wrapper.m_ComputerActionsCallbackInterface.OnMouseX;
+                @Exit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
+                @MouseY.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMouseY;
+                @MouseY.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMouseY;
+                @MouseY.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMouseY;
+                @MouseX.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMouseX;
+                @MouseX.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMouseX;
+                @MouseX.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMouseX;
             }
-            m_Wrapper.m_ComputerActionsCallbackInterface = instance;
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Exit.started += instance.OnExit;
@@ -835,105 +678,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public ComputerActions @Computer => new ComputerActions(this);
-
-    // Coffee Roaster
-    private readonly InputActionMap m_CoffeeRoaster;
-    private ICoffeeRoasterActions m_CoffeeRoasterActionsCallbackInterface;
-    private readonly InputAction m_CoffeeRoaster_MouseX;
-    private readonly InputAction m_CoffeeRoaster_MouseY;
-    private readonly InputAction m_CoffeeRoaster_Exit;
-    public struct CoffeeRoasterActions
-    {
-        private @PlayerControls m_Wrapper;
-        public CoffeeRoasterActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MouseX => m_Wrapper.m_CoffeeRoaster_MouseX;
-        public InputAction @MouseY => m_Wrapper.m_CoffeeRoaster_MouseY;
-        public InputAction @Exit => m_Wrapper.m_CoffeeRoaster_Exit;
-        public InputActionMap Get() { return m_Wrapper.m_CoffeeRoaster; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CoffeeRoasterActions set) { return set.Get(); }
-        public void SetCallbacks(ICoffeeRoasterActions instance)
-        {
-            if (m_Wrapper.m_CoffeeRoasterActionsCallbackInterface != null)
-            {
-                @MouseX.started -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnMouseX;
-                @MouseX.performed -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnMouseX;
-                @MouseX.canceled -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnMouseX;
-                @MouseY.started -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnMouseY;
-                @MouseY.performed -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnMouseY;
-                @MouseY.canceled -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnMouseY;
-                @Exit.started -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_CoffeeRoasterActionsCallbackInterface.OnExit;
-            }
-            m_Wrapper.m_CoffeeRoasterActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MouseX.started += instance.OnMouseX;
-                @MouseX.performed += instance.OnMouseX;
-                @MouseX.canceled += instance.OnMouseX;
-                @MouseY.started += instance.OnMouseY;
-                @MouseY.performed += instance.OnMouseY;
-                @MouseY.canceled += instance.OnMouseY;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
-            }
-        }
-    }
-    public CoffeeRoasterActions @CoffeeRoaster => new CoffeeRoasterActions(this);
-
-    // Packaging
-    private readonly InputActionMap m_Packaging;
-    private IPackagingActions m_PackagingActionsCallbackInterface;
-    private readonly InputAction m_Packaging_MouseX;
-    private readonly InputAction m_Packaging_MouseY;
-    private readonly InputAction m_Packaging_Exit;
-    public struct PackagingActions
-    {
-        private @PlayerControls m_Wrapper;
-        public PackagingActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MouseX => m_Wrapper.m_Packaging_MouseX;
-        public InputAction @MouseY => m_Wrapper.m_Packaging_MouseY;
-        public InputAction @Exit => m_Wrapper.m_Packaging_Exit;
-        public InputActionMap Get() { return m_Wrapper.m_Packaging; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PackagingActions set) { return set.Get(); }
-        public void SetCallbacks(IPackagingActions instance)
-        {
-            if (m_Wrapper.m_PackagingActionsCallbackInterface != null)
-            {
-                @MouseX.started -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseX;
-                @MouseX.performed -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseX;
-                @MouseX.canceled -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseX;
-                @MouseY.started -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseY;
-                @MouseY.performed -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseY;
-                @MouseY.canceled -= m_Wrapper.m_PackagingActionsCallbackInterface.OnMouseY;
-                @Exit.started -= m_Wrapper.m_PackagingActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_PackagingActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_PackagingActionsCallbackInterface.OnExit;
-            }
-            m_Wrapper.m_PackagingActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MouseX.started += instance.OnMouseX;
-                @MouseX.performed += instance.OnMouseX;
-                @MouseX.canceled += instance.OnMouseX;
-                @MouseY.started += instance.OnMouseY;
-                @MouseY.performed += instance.OnMouseY;
-                @MouseY.canceled += instance.OnMouseY;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
-            }
-        }
-    }
-    public PackagingActions @Packaging => new PackagingActions(this);
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnWalking(InputAction.CallbackContext context);
@@ -945,22 +690,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnExtraInteract(InputAction.CallbackContext context);
     }
-    public interface IComputerActions
+    public interface IUIActions
     {
         void OnExit(InputAction.CallbackContext context);
         void OnMouseY(InputAction.CallbackContext context);
         void OnMouseX(InputAction.CallbackContext context);
-    }
-    public interface ICoffeeRoasterActions
-    {
-        void OnMouseX(InputAction.CallbackContext context);
-        void OnMouseY(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
-    }
-    public interface IPackagingActions
-    {
-        void OnMouseX(InputAction.CallbackContext context);
-        void OnMouseY(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
     }
 }

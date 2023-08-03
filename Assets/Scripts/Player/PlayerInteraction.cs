@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("UI Objects")]
-    [SerializeField] private Canvas interactableCanvas;
+    [SerializeField] private GameObject interactableCanvas;
     [SerializeField] private TMP_Text interactableName;
     [SerializeField] private TMP_Text interactablePrompt;
     [SerializeField] private TMP_Text interactablePrompt2;

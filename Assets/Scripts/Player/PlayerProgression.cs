@@ -50,7 +50,6 @@ public class PlayerProgression : MonoBehaviour
         AddCurrency(0);
         AddXP(0);
         LevelUp(0);
-
         RefreshXP();
     }
 
@@ -86,7 +85,22 @@ public class PlayerProgression : MonoBehaviour
         if (currency >= 1000) { currencyText.text = "€" + (currency / 1000f).ToString(("#.##") + "K").Replace(",", "."); } 
         else { currencyText.text = "€ " + currency.ToString(); }
         
-        PopUp(toAddAmount.ToString(), "currency");
+        PopUp(toAddAmount.ToString(), "currency-add");
+    }
+
+    public void RemoveCurrency(int toRemoveAmount)
+    {
+        currency -= toRemoveAmount;
+
+        if (currency >= 1000) { currencyText.text = "€" + (currency / 1000f).ToString(("#.##") + "K").Replace(",", "."); }
+        else { currencyText.text = "€ " + currency.ToString(); }
+
+        PopUp(toRemoveAmount.ToString(), "currency-remove");
+    }
+
+    public int ReturnCurrency()
+    {
+        return currency;
     }
 
     public void AddXP(int toAddAmount)
@@ -111,9 +125,13 @@ public class PlayerProgression : MonoBehaviour
     {
         switch (type)
         {
-            case "currency":
+            case "currency-add":
                 coinText.text = "+€" + toAddText;
-                StartCoroutine(DisablePopup(sec, "currency"));
+                StartCoroutine(DisablePopup(sec, "currency-add"));
+                break;
+            case "currency-remove":
+                coinText.text = "-€" + toAddText;
+                StartCoroutine(DisablePopup(sec, "currency-remove"));
                 break;
             case "exp":
                 expText.text = "+" + toAddText + "XP";
@@ -133,7 +151,13 @@ public class PlayerProgression : MonoBehaviour
     {
         switch (type)
         {
-            case "currency":
+            case "currency-add":
+                coinPanel.gameObject.SetActive(true);
+                Debug.Log("currency popup");
+                yield return new WaitForSeconds(seconds);
+                coinPanel.gameObject.SetActive(false);
+                break;
+            case "currency-remove":
                 coinPanel.gameObject.SetActive(true);
                 Debug.Log("currency popup");
                 yield return new WaitForSeconds(seconds);

@@ -18,6 +18,11 @@ public class StorageSpace : MonoBehaviour, IInteractable
 
     [SerializeField] HandInventory handInventory;
 
+    private void Awake()
+    {
+        handInventory = GameObject.Find("Player").GetComponent<HandInventory>();
+    }
+
     public bool Interact(PlayerInteraction playerInteraction)
     {
         handInventory.DropItem(transform.position, transform.rotation, transform, storageType.ToString());
