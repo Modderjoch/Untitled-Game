@@ -17,7 +17,7 @@ MonoBehaviour:
     with a mellow flavor that makes for a very typical dark roast.  '
   image: {fileID: 21300000, guid: b2d94146d99d2944f8d5322aef755c4c, type: 3}
   weight: 10
-  pricePerKG: 50
+  pricePerKG: 20
   moistureLevel: 3
   roastLevel: 0
   grindLevel: 0

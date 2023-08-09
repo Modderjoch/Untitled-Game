@@ -21,7 +21,7 @@ public class CoffeeBag : MonoBehaviour, IInteractable
     public string InteractionPrompt2 => interactionPrompt2;
     public string InteractionName => interactionName;
 
-    private void Awake()
+    public void Start()
     {
         if(coffeeData != null)
         {

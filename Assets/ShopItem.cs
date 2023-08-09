@@ -12,11 +12,20 @@ public class ShopItem : MonoBehaviour
     public TextMeshProUGUI price;
 
     public Button buyButton;
+    public Slider weightSlider;
 
     public CoffeeData coffeeData;
 
+    private void Start()
+    {
+        Debug.Log(coffeeData.name);
+    }
+
     public void Buy()
     {
-        GetComponentInParent<CoffeeShop>().BuyItem(coffeeData.pricePerKG, coffeeData);
+        int buyPrice = weightSlider.GetComponent<WeightSlider>().totalPrice;
+        int finalWeigt = weightSlider.GetComponent<WeightSlider>().finalWeight;
+
+        GetComponentInParent<CoffeeShop>().BuyItem(buyPrice, finalWeigt, coffeeData);
     }
 }

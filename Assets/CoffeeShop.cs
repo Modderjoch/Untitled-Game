@@ -27,20 +27,23 @@ public class CoffeeShop : MonoBehaviour
             shopItem.name.text = gameManager.coffeeData[i].coffeeName;
             shopItem.description.text = gameManager.coffeeData[i].description;
             shopItem.image.sprite = gameManager.coffeeData[i].image;
-            shopItem.price.text = string.Format("€{0}", gameManager.coffeeData[i].pricePerKG.ToString());
+            shopItem.price.text = string.Format("{0}€/kilo", gameManager.coffeeData[i].pricePerKG.ToString());
             shopItem.buyButton.onClick.AddListener(() => shopItem.Buy());
 
             shopItem.coffeeData = gameManager.coffeeData[i];
         }
     }
 
-    public void BuyItem(int price, CoffeeData coffeeData)
+    public void BuyItem(int price, int weight, CoffeeData coffeeData)
     {
         if (CanAfford(price))
         {
             GameObject newBag = Instantiate(bagPrefab, bagParent);
             CoffeeBag coffeeBag = newBag.GetComponent<CoffeeBag>();
             coffeeBag.coffeeData = coffeeData;
+            coffeeBag.coffeeData.weight = weight;
+
+            Debug.Log("Bought: " + coffeeBag.coffeeData.name + " with: " + coffeeBag.coffeeData.weight);
         }        
     }
 
@@ -52,6 +55,6 @@ public class CoffeeShop : MonoBehaviour
             return true;
         }
 
-        return true;
+        return false;
     }
 }

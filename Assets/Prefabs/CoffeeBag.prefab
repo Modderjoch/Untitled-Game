@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8591147918034645277}
   - component: {fileID: 3252696618000209024}
   m_Layer: 0
-  m_Name: Text (TMP) (1)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3101134299755635540}
   - component: {fileID: 3711994017948190513}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Weight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,6 +422,8 @@ MonoBehaviour:
   interactionPrompt: Press [E] to pick up
   interactionPrompt2: 
   interactionName: Coffee Bag
+  coffeeName: {fileID: 3252696618000209024}
+  coffeeWeight: {fileID: 3711994017948190513}
 --- !u!65 &6136680289683076564
 BoxCollider:
   m_ObjectHideFlags: 0
