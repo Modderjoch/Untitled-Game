@@ -15,6 +15,8 @@ public class Computer : MonoBehaviour, IInteractable
     [Header("Interaction")]
     [SerializeField] private string _prompt;
     [SerializeField] private string _prompt2;
+    [SerializeField] private Sprite promptImage;
+    [SerializeField] private Sprite promptImage2;
     [SerializeField] private string _name;
 
     [Header("Screenshot")]
@@ -22,6 +24,8 @@ public class Computer : MonoBehaviour, IInteractable
 
     public string InteractionPrompt => _prompt;
     public string InteractionPrompt2 => _prompt2;
+    public Sprite PromptImage => promptImage;
+    public Sprite PromptImage2 => promptImage2;
     public string InteractionName => _name;
 
     public string screenshotFilename = "computerscreen.png";

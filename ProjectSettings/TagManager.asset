@@ -5,10 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
-  - Sender
-  - Title
-  - Date
-  - Window
   layers:
   - Default
   - TransparentFX
