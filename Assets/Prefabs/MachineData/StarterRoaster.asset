@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Your first coffee roaster.
   image: {fileID: 21300000, guid: 80590a9263e1e1243b23b85edae46da7, type: 3}
   unitPrice: 0
+  weightLoss: 0.951
   moistureRange: 10
   roastRange: 0
   grindRange: 0

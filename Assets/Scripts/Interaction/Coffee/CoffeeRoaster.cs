@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,10 @@ public class CoffeeRoaster : MonoBehaviour, IInteractable
     private bool isRoasting = false;
     private float roastingTime = 0.0f;
     private CoffeeBag coffeeBag;
+    private float usedWeight;
 
+    [SerializeField] private GameObject roasted;
+    [SerializeField] private Transform roastedResult;
 
     public bool Interact(PlayerInteraction playerInteraction)
     {
@@ -37,20 +41,23 @@ public class CoffeeRoaster : MonoBehaviour, IInteractable
             return false;
         }
 
-        if (!GameObject.Find("Player").GetComponent<HandInventory>().HandsAreEmpty())
+        if (GameObject.Find("Player").GetComponent<HandInventory>().HandsAreEmpty() == false)
         {
-            CoffeeBag coffeeBag = GameObject.Find("Player").GetComponent<HandInventory>().GetComponentInChildren<CoffeeBag>();
+            coffeeBag = GameObject.Find("Player").GetComponent<HandInventory>().GetComponentInChildren<CoffeeBag>();
+            Debug.Log(coffeeBag + "Got ze cofiebag");
         }
 
         if (coffeeBag != null && coffeeBag.coffeeData.type == CoffeeData.Type.Raw)
         {
             float amountToFill = Mathf.Min(maxRoastingCapacity, coffeeBag.coffeeData.weight);
+            usedWeight = amountToFill;
             coffeeBag.RemoveWeight(amountToFill); // Remove coffee from bag.
             isRoasting = true;
-            coffeeBag.coffeeData.type = CoffeeData.Type.Roasted; // Change coffee type to roasted.
+
+            roastedCoffeeData = coffeeBag.coffeeData;
 
             // Start roasting process.
-            Debug.Log("Started roasting process with " + amountToFill + " kg of coffee...");
+            Debug.Log("Started roasting process with " + amountToFill + " kg of coffee..." + roastedCoffeeData.coffeeName + roastedCoffeeData.weight);
             return true;
         }
 
@@ -59,19 +66,39 @@ public class CoffeeRoaster : MonoBehaviour, IInteractable
 
     public bool ExtraInteract(PlayerInteraction playerInteraction)
     {
-        // Roast the coffee if it's in the roaster.
         if (isRoasting)
         {
-            roastingTime += Time.deltaTime;
-            if (roastingTime >= roastingDuration)
-            {
-                // Finish roasting.
-                Debug.Log("Coffee roasted!");
-                isRoasting = false;
-                roastingTime = 0.0f;
-            }
+            StartCoroutine(RoastCoffee(roastingDuration));
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
 
-        return false;
+    private IEnumerator RoastCoffee(float delaySeconds)
+    {
+        Debug.Log("Roasting started. Waiting for " + delaySeconds + " seconds...");
+        yield return new WaitForSeconds(delaySeconds);
+
+        // Finish roasting.
+        Debug.Log("Coffee roasted!");
+        isRoasting = false;
+        roastingTime = 0.0f;
+
+        GameObject result = Instantiate(roasted, roastedResult);
+        result.AddComponent<RoastedCoffee>();
+
+        RoastedCoffee resultComp = result.GetComponent<RoastedCoffee>();
+        Debug.Log(resultComp);
+        resultComp.interactionName = "Roasted " + roastedCoffeeData.coffeeName;
+        resultComp.interactionPrompt2 = "";
+        resultComp.interactionPrompt = "to collect";
+        resultComp.promptImage = promptImage;
+
+        resultComp.coffeeData = roastedCoffeeData;
+        resultComp.coffeeData.weight = usedWeight * machineData.weightLoss;
+        resultComp.coffeeData.type = CoffeeData.Type.Roasted;        
     }
 }

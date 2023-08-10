@@ -26,16 +26,6 @@ public class HandInventory : MonoBehaviour
         return null;
     }
 
-    public string ReturnType()
-    {
-        if(itemHolding != null)
-        {
-            return itemHolding.name;
-        }
-
-        return null;
-    }
-
     public bool HandsAreEmpty()
     {
         if(itemHolding != null)

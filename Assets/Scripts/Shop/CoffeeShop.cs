@@ -42,7 +42,7 @@ public class CoffeeShop : MonoBehaviour
         {
             GameObject newBag = Instantiate(bagPrefab, bagParent[bagIndex]);
             CoffeeBag coffeeBag = newBag.GetComponent<CoffeeBag>();
-            coffeeBag.coffeeData = coffeeData;
+            coffeeBag.coffeeData = Instantiate(coffeeData);
             coffeeBag.coffeeData.weight = weight;
 
             Debug.Log("Bought: " + coffeeBag.coffeeData.name + " with: " + coffeeBag.coffeeData.weight);

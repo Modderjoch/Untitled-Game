@@ -15,7 +15,7 @@ MonoBehaviour:
   coffeeName: Colombia
   description: Colombia is an incredible place to grow coffee, full stop.
   image: {fileID: 21300000, guid: b2d94146d99d2944f8d5322aef755c4c, type: 3}
-  weight: 10
+  weight: 26
   pricePerKG: 50
   moistureLevel: 9
   roastLevel: 0

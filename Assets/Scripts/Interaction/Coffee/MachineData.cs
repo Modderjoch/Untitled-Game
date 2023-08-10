@@ -8,6 +8,7 @@ public class MachineData : ScriptableObject
     public string description;
     public Sprite image;
     public int unitPrice;
+    [Range(0f, 1f)]public float weightLoss;
 
     [Header("Raw Data")]
     public int moistureRange;

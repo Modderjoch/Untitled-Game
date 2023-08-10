@@ -30,7 +30,7 @@ public class CoffeeBag : MonoBehaviour, IInteractable
     {
         if(coffeeData != null)
         {
-            coffeeName.text = coffeeData.name;
+            coffeeName.text = coffeeData.coffeeName;
             coffeeWeight.text = string.Format("{0}KG", coffeeData.weight);
         }        
     }
