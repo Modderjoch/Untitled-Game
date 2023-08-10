@@ -12,6 +12,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private TMP_Text interactableName;
     [SerializeField] private TMP_Text interactablePrompt;
     [SerializeField] private TMP_Text interactablePrompt2;
+    [SerializeField] private Image interactableImagePrompt;
+    [SerializeField] private Image interactableImagePrompt2;
     [SerializeField] private GameObject promptPanel;
 
     [Header("Raycast")]
@@ -48,7 +50,9 @@ public class PlayerInteraction : MonoBehaviour
 
                     interactableName.text = interactable.InteractionName;
                     interactablePrompt.text = interactable.InteractionPrompt;
+                    interactableImagePrompt.sprite = interactable.PromptImage;
                     interactablePrompt2.text = interactable.InteractionPrompt2;
+                    interactableImagePrompt2.sprite = interactable.PromptImage2;
 
                     if (interactablePrompt2.text != "") { promptPanel.SetActive(true); } else { promptPanel.SetActive(false); }
 
@@ -66,6 +70,12 @@ public class PlayerInteraction : MonoBehaviour
                         extraInteract = false;
                         lastHit = null;
                     }
+                }
+                else
+                {
+                    interactableCanvas.gameObject.SetActive(false);
+                    interactablePrompt2.text = null;
+                    interact = false;
                 }
             }
             else

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoffeeBag : MonoBehaviour, IInteractable
 {
@@ -11,6 +12,8 @@ public class CoffeeBag : MonoBehaviour, IInteractable
     [Header("Interaction")]
     [SerializeField] private string interactionPrompt;
     [SerializeField] private string interactionPrompt2;
+    [SerializeField] private Sprite promptImage;
+    [SerializeField] private Sprite promptImage2;
     [SerializeField] private string interactionName;
 
     [Header("Bag Information")]
@@ -20,6 +23,8 @@ public class CoffeeBag : MonoBehaviour, IInteractable
     public string InteractionPrompt => interactionPrompt;
     public string InteractionPrompt2 => interactionPrompt2;
     public string InteractionName => interactionName;
+    public Sprite PromptImage => promptImage;
+    public Sprite PromptImage2 => promptImage2;
 
     public void Start()
     {
@@ -30,11 +35,20 @@ public class CoffeeBag : MonoBehaviour, IInteractable
         }        
     }
 
+    public void RemoveWeight(float toRemove)
+    {
+        coffeeData.weight -= toRemove;
+
+        coffeeWeight.text = string.Format("{0}KG", coffeeData.weight);
+    }
+
     public bool Interact(PlayerInteraction playerInteraction)
     {
         if (coffeeData != null)
         {
             Debug.Log("You interacted with the coffee bag. Coffee Name: " + coffeeData.coffeeName);
+
+            GameObject.Find("Player").GetComponent<HandInventory>().HoldItem(gameObject);
         }
 
         return true; // Return true to indicate the interaction was successful.
